@@ -15,13 +15,21 @@ def wordle():
 
     def enter_action():
         # What should happen when RETURN/ENTER is pressed.
-        gw.show_message("You need to implement this method")
-
+        w = ''
+        for i in range(5):
+            w += gw.get_square_letter(0, i)
+        w = w.lower()
+        print(w)
+        if w in ENGLISH_WORDS:
+            gw.show_message('Valid word!')
+        else:
+            gw.show_message('Not a valid word')
+      
 
     gw = WordleGWindow()
     gw.add_enter_listener(enter_action)
 
-
+    
 
 
 # Startup boilerplate
