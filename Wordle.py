@@ -1,29 +1,38 @@
 ########################################
-# Name:
-# Collaborators (if any):
+# Name: Noah Klarreich
+# Collaborators (if any): Just myself
 # GenAI Transcript (if any):
-# Estimated time spent (hr):
+# Estimated time spent (hr):1:30
 # Description of any added extensions:
 ########################################
 
 from WordleGraphics import *  # WordleGWindow, N_ROWS, N_COLS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, UNKNOWN_COLOR
 from english import * # ENGLISH_WORDS, is_english_word
 import random
+row_index = 0
 
 def wordle():
     # The main function to play the Wordle game.
-
+    random_word = random_five_letter_word()
+    
     def enter_action():
+        global row_index
         # What should happen when RETURN/ENTER is pressed.
         w = ''
         for i in range(5):
-            w += gw.get_square_letter(0, i)
+            w += gw.get_square_letter(row_index, i)
         w = w.lower()
         if w in ENGLISH_WORDS:
             gw.show_message('Valid word!')
+            color_row(row_index, random_word)
         else:
             gw.show_message('Not a valid word')
-        color_row(0, 'glass')
+        if w == random_word:
+                gw.show_message('You Win!')
+        elif gw.get_current_row() == N_ROWS-1:
+            gw.show_message('You Lose! The word is: ' + random_word)
+        row_index += 1
+        gw.set_current_row(row_index)
       
 
     gw = WordleGWindow()
@@ -38,6 +47,7 @@ def wordle():
             l = gw.get_square_letter(r, i).lower()
             if l == a[i]:
                 gw.set_square_color(r, i, CORRECT_COLOR)
+                gw.set_key_color(l, CORRECT_COLOR)	
              #   print(l, a[i])
                 correct.append(i)
                 a[i] = '0'
@@ -49,6 +59,7 @@ def wordle():
             if i not in correct:
                 if l in a:
                         gw.set_square_color(r, i, PRESENT_COLOR)
+                        gw.set_key_color(l, PRESENT_COLOR)	
                         index = a2.rfind(l)
                         a[index] = '0'
                         a2 = ''
@@ -57,8 +68,14 @@ def wordle():
                        # print(l, a[i], index)
                 else:
                     gw.set_square_color(r, i, MISSING_COLOR)
+                    gw.set_key_color(l, MISSING_COLOR)
                   #  print(l, a[i])
       #  print(a)
+def random_five_letter_word():
+    random.shuffle(ENGLISH_WORDS)
+    five_l_w = [w for w in ENGLISH_WORDS if len(w)==5]
+    return five_l_w[0]
+    
 
 # Startup boilerplate
 if __name__ == "__main__":
