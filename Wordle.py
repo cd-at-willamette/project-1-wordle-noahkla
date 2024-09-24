@@ -1,8 +1,8 @@
 ########################################
-# Name:
-# Collaborators (if any):
+# Name: Noah Klarreich
+# Collaborators (if any): 
 # GenAI Transcript (if any):
-# Estimated time spent (hr):
+# Estimated time spent (hr): 1:30
 # Description of any added extensions:
 ########################################
 
