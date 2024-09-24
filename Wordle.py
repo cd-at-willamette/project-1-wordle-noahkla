@@ -1,8 +1,8 @@
 ########################################
-# Name: Noah Klarreich
-# Collaborators (if any): Just myself
+# Name:
+# Collaborators (if any):
 # GenAI Transcript (if any):
-# Estimated time spent (hr):1:30
+# Estimated time spent (hr):
 # Description of any added extensions:
 ########################################
 
@@ -14,7 +14,6 @@ row_index = 0
 def wordle():
     # The main function to play the Wordle game.
     random_word = random_five_letter_word()
-    
     def enter_action():
         global row_index
         # What should happen when RETURN/ENTER is pressed.
@@ -45,6 +44,9 @@ def wordle():
         a = list(a)
         for i in range(len(a2)):
             l = gw.get_square_letter(r, i).lower()
+# If the letter is in the right spot, it collors it correct color, adds the
+# index to the list of correct letter, and sets it to 0 in both a and a2
+# in case there is a repeat of the letter
             if l == a[i]:
                 gw.set_square_color(r, i, CORRECT_COLOR)
                 gw.set_key_color(l, CORRECT_COLOR)	
@@ -54,6 +56,9 @@ def wordle():
                 a2 = ''
                 for j in a:
                     a2 += j
+# Then it does the for loop again, checks if each letter is in the wrong place,
+# or is not in the word at all. If it is in the wrong place, it sets
+# the letter to 0 in case of repeats.
         for i in range(len(a2)):
             l = gw.get_square_letter(r, i).lower()
             if i not in correct:
