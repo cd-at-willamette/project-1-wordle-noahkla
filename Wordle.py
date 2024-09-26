@@ -14,6 +14,7 @@ row_index = 0
 def wordle():
     # The main function to play the Wordle game.
     random_word = random_five_letter_word()
+    #random_word = 'chomp'
     def enter_action():
         global row_index
         # What should happen when RETURN/ENTER is pressed.
@@ -26,6 +27,7 @@ def wordle():
             color_row(row_index, random_word)
         else:
             gw.show_message('Not a valid word')
+            return
         if w == random_word:
                 gw.show_message('You Win!')
         elif gw.get_current_row() == N_ROWS-1:
